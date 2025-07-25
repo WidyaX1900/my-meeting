@@ -17,13 +17,7 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
-    console.log(`User ${socket.id} connected`);
-    socket.on("disconnect", () => {
-        if(disconnectTimeout) clearTimeout(disconnectTimeout);
-        disconnectTimeout = setTimeout(() => {
-            console.log(`${socket.id} disconnected`);            
-        }, 3000);
-    });
+    socket.on("disconnect", () => {});
     
 });
 server.listen(port, () => console.log(`NodeJS running on port: ${port}`));
