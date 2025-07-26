@@ -4,10 +4,10 @@
     <div class="container mt-3">
         <div id="alertInfo"></div>
         <h3 class="mb-4">My Meeting</h3>
-        <button id="addStudentBtn" type="button" class="btn btn-primary">
+        <button id="addMeetingRoomBtn" type="button" class="btn btn-primary">
             <i class="fa-solid fa-plus me-1"></i> Create Meeting
         </button>
-        <table id="studentTable" class="table table-light table-striped mt-4 text-center">
+        <table id="meetingRoomTable" class="table table-light table-striped mt-4 text-center">
             <thead>
                 <th>#</th>
                 <th>Name</th>
@@ -33,3 +33,4 @@
         </table>
     </div>
 @endsection
+@extends('layouts.modal')

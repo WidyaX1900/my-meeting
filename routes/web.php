@@ -11,12 +11,14 @@ Route::middleware('guest')->group(function() {
     Route::post('/login', [AuthController::class, 'login']);
 });
 
-Route::middleware('auth')->group(function() {
-    Route::get('/', [MeetingRoomController::class, 'index']);
-    
+Route::middleware('auth')->group(function() {    
     Route::get('/test', function () {
         return view('test');
-    });
-
-    Route::post('/logout', [AuthController::class, 'logout']);
+    });    
+    
+    Route::post('/logout', [AuthController::class, 'logout']);    
+    
+    // Meeting Route
+    Route::get('/', [MeetingRoomController::class, 'index']);
+    Route::post('/meeting_room/store', [MeetingRoomController::class, 'store']);
 });

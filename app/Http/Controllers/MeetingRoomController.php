@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\MeetingRoom;
 use App\Http\Requests\StoreMeetingRoomRequest;
 use App\Http\Requests\UpdateMeetingRoomRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class MeetingRoomController extends Controller
 {
@@ -17,19 +20,33 @@ class MeetingRoomController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
      * Store a newly created resource in storage.
      */
-    public function store(StoreMeetingRoomRequest $request)
+    public function store(Request $request)
     {
-        //
+        $validator = Validator::make($request->all(), [
+            'name' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'status' => 'error',
+                'validation_errors' => $validator->errors()
+            ]);
+        }
+
+        $room_token = uniqid();
+        $meeting_room = MeetingRoom::create([
+            'name' => $request->name,
+            'room_token' => $room_token,
+            'user_id' => Auth::id()
+        ]);
+
+        if ($meeting_room) {
+            return response()->json([
+                'status' => 'success'
+            ]);
+        }
     }
 
     /**
