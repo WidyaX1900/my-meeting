@@ -12,18 +12,9 @@
 
 <body>
     <div class="container mt-4">
-        <h1>Create an Account</h1>
-        <form action="/save" method="post" class="col-6 border rounded p-3 mt-4">
+        <h1>Log In Your Account</h1>
+        <form action="/login" method="post" class="col-6 border rounded p-3 mt-4">
             @csrf
-            <div class="mb-3">
-                <label for="name" class="form-label">Full Name</label>
-                <input type="text" class="form-control" id="name" name="name" placeholder="Full Name..." value="{{ old('name') }}">
-                @error('name')
-                    <div class="mt-1">
-                        <small class="text-danger">{{ $message }}</small>
-                    </div>
-                @enderror
-            </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="text" class="form-control" id="email" name="email" placeholder="name@example.com" value="{{ old('email') }}">
@@ -43,9 +34,9 @@
                 @enderror
             </div>
             <div class="mb-3">
-                <span>Already have an account? <a href="/login">Log In</a></span>
+                <span>Don't have an account? <a href="/register">Register</a></span>
             </div>
-            <button type="submit" class="btn btn-primary">Register</button>
+            <button type="submit" class="btn btn-primary">Log In</button>
         </form>
     </div>
 </body>
