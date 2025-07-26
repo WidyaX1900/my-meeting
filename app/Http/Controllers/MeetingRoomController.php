@@ -13,7 +13,7 @@ class MeetingRoomController extends Controller
      */
     public function index()
     {
-        //
+        return view('meeting_room.index');
     }
 
     /**

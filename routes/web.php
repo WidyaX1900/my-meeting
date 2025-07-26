@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MeetingRoomController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware('guest')->group(function() {
@@ -11,9 +12,7 @@ Route::middleware('guest')->group(function() {
 });
 
 Route::middleware('auth')->group(function() {
-    Route::get('/', function () {
-        return view('layouts.layout');
-    });
+    Route::get('/', [MeetingRoomController::class, 'index']);
     
     Route::get('/test', function () {
         return view('test');
