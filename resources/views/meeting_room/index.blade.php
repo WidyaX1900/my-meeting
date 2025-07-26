@@ -14,21 +14,23 @@
                 <th>Action</th>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Meeting Room</td>
-                    <td>
-                        <button type="button" class="btn btn-sm btn-info me-2 view-btn">
-                            <i class="fa-solid fa-eye"></i>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-warning me-2 edit-btn">
-                            <i class="fa-solid fa-pen"></i>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-danger delete-btn">
-                            <i class="fa-solid fa-trash-can"></i>
-                        </button>
-                    </td>
-                </tr>
+                @foreach ($meeting_rooms as $room)
+                    <tr>
+                        <td>{{ $loop->iteration }}</td>
+                        <td>{{ $room->name }}</td>
+                        <td>
+                            <button type="button" class="btn btn-sm btn-info me-2 view-btn">
+                                <i class="fa-solid fa-eye"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-warning me-2 edit-btn">
+                                <i class="fa-solid fa-pen"></i>
+                            </button>
+                            <button type="button" class="btn btn-sm btn-danger delete-btn">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </td>
+                    </tr>                    
+                @endforeach
             </tbody>
         </table>
     </div>

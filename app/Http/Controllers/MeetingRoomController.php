@@ -16,7 +16,8 @@ class MeetingRoomController extends Controller
      */
     public function index()
     {
-        return view('meeting_room.index');
+        $meeting_rooms = MeetingRoom::where('user_id', Auth::id())->get();
+        return view('meeting_room.index', ['meeting_rooms' => $meeting_rooms]);
     }
 
     /**
