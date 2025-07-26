@@ -13,7 +13,15 @@ return new class extends Migration
     {
         Schema::create('meeting_rooms', function (Blueprint $table) {
             $table->id();
+            $table->string('name', 255);
+            $table->string('room_token', 255);
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
