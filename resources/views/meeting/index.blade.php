@@ -4,7 +4,7 @@
         <div class="full-video-container">
             <video id="fullVideo" muted autoplay playsinline></video>
             <div class="participant-name">
-                <h5 id="participantName" class="text-light ms-3"></h5>
+                <h5 id="participantName" class="text-light ms-3">{{ $my_name }}</h5>
             </div>
         </div>
         <div class="list-video-container">
@@ -12,5 +12,6 @@
                 <video id="localVideo" muted autoplay playsinline></video>
             </div>
         </div>
+        <input type="hidden" id="meetingRoom" value="{{ $room_token }}">
     </div>
 @endsection
