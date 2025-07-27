@@ -50,4 +50,24 @@ $(function() {
             },
         });
     });
+
+    $("#meetingRoomTable").on("click", ".copy-btn", function() {
+        const room_token = $(this).data("room_token");
+        const text = baseUrl(`meeting/join/${room_token}`);
+        const copy = navigator.clipboard.writeText(text);
+
+        copy.then(() => {
+            alert("url copied");
+        }).catch((error) => {
+            alert("url not copied");
+        });
+    });
+
+    function baseUrl(path = "") {
+        const protocol = window.location.protocol;
+        const hostname = window.location.hostname;
+        const port = window.location.port;
+
+        return `${protocol}//${hostname}:${port}/${path}`;
+    }
 });

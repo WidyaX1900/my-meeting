@@ -25,6 +25,9 @@
                             <button type="button" class="btn btn-sm btn-warning me-2 edit-btn">
                                 <i class="fa-solid fa-pen"></i>
                             </button>
+                            <button type="button" class="btn btn-sm btn-info me-2 copy-btn" data-room_token="{{ $room->room_token }}">
+                                <i class="fa-solid fa-copy"></i>
+                            </button>
                         </td>
                     </tr>                    
                 @endforeach
