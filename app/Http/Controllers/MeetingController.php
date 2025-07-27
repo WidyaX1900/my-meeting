@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Meeting;
-use App\Http\Requests\StoreMeetingRequest;
-use App\Http\Requests\UpdateMeetingRequest;
 use App\Models\MeetingRoom;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class MeetingController extends Controller
@@ -50,6 +49,26 @@ class MeetingController extends Controller
                 'my_name' => Auth::user()->name
             ]);
             return redirect('/meeting');
+        }
+    }
+
+    public function save_peer(Request $request)
+    {
+        $peer_id = $request->peerId;
+        $socket_id = $request->socket_id;
+        $user_id = Auth::id();
+
+        $save = Meeting::where('user_id', $user_id)
+            ->where('status', 'onmeet')
+            ->update([
+                'peer_id' => $peer_id,
+                'socket_id' => $socket_id,
+            ]);
+        
+        if($save) {
+            return response()->json([
+                'status' => 'success'
+            ]);
         }
     }
 }

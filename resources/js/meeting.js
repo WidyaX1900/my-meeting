@@ -4,7 +4,8 @@ if(document.getElementById("meetingRoom")) {
     let localStream;
     const fullVideo = document.getElementById("fullVideo");
     const localVideo = document.getElementById("localVideo");
-    const room = document.getElementById("meetingRoomInput").value.trim();    
+    const room = document.getElementById("meetingRoomInput").value.trim();
+    const _token = $(`meta[name="csrf-token"]`).attr("content");        
     
     const peer = new Peer({ 
         path: "/",
@@ -38,7 +39,8 @@ if(document.getElementById("meetingRoom")) {
     });
 
     peer.on("open", (peerId) => {
-        socket.emit("join-meeting", { roomId: room, userId: peerId });        
+        socket.emit("join-meeting", { roomId: room, userId: peerId });
+        savePeerId(peerId);        
     });
 
     function connectedNewUser(userId, stream) {
@@ -59,5 +61,23 @@ if(document.getElementById("meetingRoom")) {
             video.srcObject = stream;
             fullVideo.srcObject = stream;
         }
+    }
+
+    function savePeerId(peerId) {
+        $.ajax({
+            url: "/meeting/save_peer",
+            type: "post",
+            data: { _token, peerId, socket_id: socket.id },
+            dataType: "json",
+            success: function(response) {
+                if(response.status === "success") {
+                    console.log("Save peer successfull");                    
+                }
+            },
+
+            error: function(error) {
+                console.log("Error fetching: ", error);                
+            }
+        });
     }
 }

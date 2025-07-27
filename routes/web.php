@@ -24,4 +24,5 @@ Route::middleware('auth')->group(function() {
     Route::post('/meeting_room/store', [MeetingRoomController::class, 'store']);
     Route::get('/meeting', [MeetingController::class, 'index']);
     Route::get('/meeting/join/{token}', [MeetingController::class, 'join']);
+    Route::post('/meeting/save_peer', [MeetingController::class, 'save_peer']);
 });
