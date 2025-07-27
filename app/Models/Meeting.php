@@ -14,6 +14,7 @@ class Meeting extends Model
         'meeting_room_id',
         'peer_id',
         'socket_id',
-        'role'
+        'role',
+        'status',
     ];
 }
