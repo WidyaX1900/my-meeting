@@ -17,6 +17,12 @@ app.get("/", (req, res) => {
 });
 
 io.on("connection", (socket) => {
+    socket.on("join-meeting", ({ roomId, userId }) => {
+        socket.join(roomId);
+        socket.to(roomId).emit("user-joined", { userId });
+    });
+    
+    
     socket.on("disconnect", () => {});
     
 });

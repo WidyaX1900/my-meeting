@@ -7,11 +7,11 @@
                 <h5 id="participantName" class="text-light ms-3">{{ $my_name }}</h5>
             </div>
         </div>
-        <div class="list-video-container">
+        <div id="listVideo" class="list-video-container">
             <div class="list-video">
                 <video id="localVideo" muted autoplay playsinline></video>
             </div>
         </div>
-        <input type="hidden" id="meetingRoom" value="{{ $room_token }}">
+        <input type="hidden" id="meetingRoomInput" value="{{ $room_token }}">
     </div>
 @endsection
