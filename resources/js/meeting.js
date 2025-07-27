@@ -20,6 +20,7 @@ if(document.getElementById("meetingRoom")) {
         localStream = stream;
         fullVideo.srcObject = stream;
         localVideo.srcObject = stream;
+        
         socket.on("user-joined", ({ userId }) => {
             setTimeout(() => {
                 connectedNewUser(userId, stream);
