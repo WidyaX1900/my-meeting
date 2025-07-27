@@ -13,7 +13,23 @@ return new class extends Migration
     {
         Schema::create('meetings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('meeting_room_id');
+            $table->string('peer_id', 255);
+            $table->string('socket_id', 255);
+            $table->string('role', 255);
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->cascadeOnDelete();
+            
+            $table->foreign('meeting_room_id')
+                ->references('id')
+                ->on('meeting_rooms')
+                ->cascadeOnDelete();
+        
         });
     }
 
