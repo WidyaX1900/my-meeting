@@ -9,4 +9,11 @@ class Meeting extends Model
 {
     /** @use HasFactory<\Database\Factories\MeetingFactory> */
     use HasFactory;
+    protected $fillable = [
+        'user_id',
+        'meeting_room_id',
+        'peer_id',
+        'socket_id',
+        'role'
+    ];
 }

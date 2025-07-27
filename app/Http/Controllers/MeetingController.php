@@ -12,6 +12,12 @@ class MeetingController extends Controller
 {
     public function index()
     {
+        $isMeeting = Meeting::where('user_id', Auth::id())->first();        
+        if(!$isMeeting) {
+            session()->forget(['room_token', 'my_name']);
+            return redirect('/');
+        } 
+        
         $room_token = session('room_token');
         $my_name = session('my_name');
         return view('meeting.index', [
@@ -27,10 +33,19 @@ class MeetingController extends Controller
             abort(404);
         }
 
-        session([
-            'room_token' => $room->room_token,
-            'my_name' => Auth::user()->name
+        $role = Auth::id() === $room->user_id ? 'host' : 'member';
+        $meeting = Meeting::create([
+            'user_id' => Auth::id(),
+            'meeting_room_id' => $room->id,
+            'role' => $role
         ]);
-        return redirect('/meeting');
+
+        if($meeting) {
+            session([
+                'room_token' => $room->room_token,
+                'my_name' => Auth::user()->name
+            ]);
+            return redirect('/meeting');
+        }
     }
 }
