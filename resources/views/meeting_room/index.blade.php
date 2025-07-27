@@ -19,14 +19,11 @@
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $room->name }}</td>
                         <td>
-                            <button type="button" class="btn btn-sm btn-info me-2 view-btn">
-                                <i class="fa-solid fa-eye"></i>
-                            </button>
+                            <a href="/meeting/join/{{ $room->room_token }}" class="btn btn-sm btn-primary me-2">
+                                <i class="fa-solid fa-door-open"></i>
+                            </a>
                             <button type="button" class="btn btn-sm btn-warning me-2 edit-btn">
                                 <i class="fa-solid fa-pen"></i>
-                            </button>
-                            <button type="button" class="btn btn-sm btn-danger delete-btn">
-                                <i class="fa-solid fa-trash-can"></i>
                             </button>
                         </td>
                     </tr>                    

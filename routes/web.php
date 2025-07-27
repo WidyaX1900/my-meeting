@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\MeetingController;
 use App\Http\Controllers\MeetingRoomController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,4 +22,6 @@ Route::middleware('auth')->group(function() {
     // Meeting Route
     Route::get('/', [MeetingRoomController::class, 'index']);
     Route::post('/meeting_room/store', [MeetingRoomController::class, 'store']);
+    Route::get('/meeting', [MeetingController::class, 'index']);
+    Route::get('/meeting/join/{token}', [MeetingController::class, 'join']);
 });
