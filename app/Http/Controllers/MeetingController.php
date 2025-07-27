@@ -12,7 +12,10 @@ class MeetingController extends Controller
 {
     public function index()
     {
-        $isMeeting = Meeting::where('user_id', Auth::id())->first();        
+        $isMeeting = Meeting::where('user_id', Auth::id())
+            ->where('status', 'onmeet')
+            ->first();        
+        
         if(!$isMeeting) {
             session()->forget(['room_token', 'my_name']);
             return redirect('/');
@@ -37,7 +40,8 @@ class MeetingController extends Controller
         $meeting = Meeting::create([
             'user_id' => Auth::id(),
             'meeting_room_id' => $room->id,
-            'role' => $role
+            'role' => $role,
+            'status' => 'onmeet',
         ]);
 
         if($meeting) {
