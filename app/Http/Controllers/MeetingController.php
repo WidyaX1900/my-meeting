@@ -22,9 +22,7 @@ class MeetingController extends Controller
             abort(404);
         }
 
-        session([
-            'room_token' => $room->room_token,
-        ]);
+        session(['room_token' => $room->room_token]);
         return redirect('/meeting');
     }
 }
