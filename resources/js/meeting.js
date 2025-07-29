@@ -21,19 +21,6 @@ if(document.getElementById("meetingRoom")) {
         localStream = stream;
         fullVideo.srcObject = stream;
         localVideo.srcObject = stream;
-        
-        socket.on("user-joined", ({ userId }) => {
-            setTimeout(() => {
-                connectedNewUser(userId, stream);
-            }, 1500)
-        });
-
-        peer.on("call", (call) => {
-            call.answer(stream);
-            call.on("stream", (remoteStream) => {
-                addRemoteVideo(call.peer, remoteStream);
-            });
-        });
     }).catch((error) => {
         console.log("Cannot display camera: ", error);        
     });
@@ -41,6 +28,19 @@ if(document.getElementById("meetingRoom")) {
     peer.on("open", (peerId) => {
         socket.emit("join-meeting", { roomId: room, userId: peerId });
         savePeerId(peerId);        
+    });
+
+    socket.on("user-joined", ({ userId }) => {
+        setTimeout(() => {
+            connectedNewUser(userId, localStream);
+        }, 1500)
+    });
+
+    peer.on("call", (call) => {
+        call.answer(localStream);
+        call.on("stream", (remoteStream) => {
+            addRemoteVideo(call.peer, remoteStream);
+        });
     });
 
     function connectedNewUser(userId, stream) {
