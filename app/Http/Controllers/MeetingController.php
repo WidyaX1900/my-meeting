@@ -22,9 +22,11 @@ class MeetingController extends Controller
         
         $room_token = session('room_token');
         $my_name = session('my_name');
+        $room_id = session('room_id');
         return view('meeting.index', [
             'room_token' => $room_token,
             'my_name' => $my_name,
+            'room_id' => $room_id,
         ]);
     }
     
@@ -46,6 +48,7 @@ class MeetingController extends Controller
         if($meeting) {
             session([
                 'room_token' => $room->room_token,
+                'room_id' => $room->id,
                 'my_name' => Auth::user()->name
             ]);
             return redirect('/meeting');
@@ -69,6 +72,25 @@ class MeetingController extends Controller
             return response()->json([
                 'status' => 'success'
             ]);
+        }
+    }
+
+    public function leave_meeting(Request $request)
+    {
+        $user_id = Auth::id();
+        $room_id = $request->room_id;
+
+        $save = Meeting::where('user_id', $user_id)
+            ->where('meeting_room_id', $room_id)
+            ->where('status', 'onmeet')
+            ->update([
+                'status' => 'ended',
+                'peer_id' => null,
+                'socket_id' => null,
+            ]);
+
+        if ($save) {
+            session()->forget(['room_token', 'my_name', 'room_id']);
         }
     }
 }

@@ -10,7 +10,7 @@ const io = new Server(server, {
         origin: "*",
     }
 });
-let disconnectTimeout;
+let room_id;
 
 app.get("/", (req, res) => {
     res.send(`<p>NodeJS running smoothly...</p>`);
@@ -18,8 +18,13 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
     socket.on("join-meeting", ({ roomId, userId }) => {
+        room_id = roomId;
         socket.join(roomId);
         socket.to(roomId).emit("user-joined", { userId });
+    });
+
+    socket.on("user-leaved", ({ userId }) => {
+        socket.to(room_id).emit("leave-meeting", { userId });        
     });
     
     

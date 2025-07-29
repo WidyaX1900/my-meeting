@@ -2,9 +2,11 @@ import { peer, socket } from "./node";
 
 if(document.getElementById("meetingRoom")) {
     let localStream;
+    let localPeer;
     const fullVideo = document.getElementById("fullVideo");
     const localVideo = document.getElementById("localVideo");
     const room = document.getElementById("meetingRoomInput").value.trim();
+    const room_id = document.getElementById("meetingRoomIdInput").value.trim();
     const _token = $(`meta[name="csrf-token"]`).attr("content");
 
     navigator.mediaDevices.getUserMedia({ 
@@ -19,6 +21,7 @@ if(document.getElementById("meetingRoom")) {
     });
 
     peer.on("open", (peerId) => {
+        localPeer = peerId;
         socket.emit("join-meeting", { roomId: room, userId: peerId });
         savePeerId(peerId);        
     });
@@ -71,6 +74,28 @@ if(document.getElementById("meetingRoom")) {
             error: function(error) {
                 console.log("Error fetching: ", error);                
             }
+        });
+    }
+
+    $("#leaveMeetingBtn").on("click", function() {
+        window.location.href = "/";
+        socket.emit("user-leaved", { userId: localPeer });
+        leaveMeeting();
+    });
+
+    socket.on("leave-meeting", ({ userId }) => {
+        if (document.getElementById(userId)) {
+            $(`#${userId}`).parent().remove();
+            fullVideo.srcObject = localStream;
+        }
+    });
+
+    function leaveMeeting() {
+        $.ajax({
+            url: "/meeting/leave_meeting",
+            type: "post",
+            data: { _token, room_id },
+            dataType: "json"
         });
     }
 }

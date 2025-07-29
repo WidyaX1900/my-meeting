@@ -13,5 +13,9 @@
             </div>
         </div>
         <input type="hidden" id="meetingRoomInput" value="{{ $room_token }}">
+        <input type="hidden" id="meetingRoomIdInput" value="{{ $room_id }}">
+        <div class="fixed-bottom w-50 bg-dark p-3 mx-auto mb-3">
+            <button id="leaveMeetingBtn" type="button" class="btn btn-danger btn-sm">Leave</button>
+        </div>
     </div>
 @endsection
