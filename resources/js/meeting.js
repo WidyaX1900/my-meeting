@@ -1,18 +1,11 @@
-import { Peer } from "peerjs";
+import { peer, socket } from "./node";
 
 if(document.getElementById("meetingRoom")) {
     let localStream;
     const fullVideo = document.getElementById("fullVideo");
     const localVideo = document.getElementById("localVideo");
     const room = document.getElementById("meetingRoomInput").value.trim();
-    const _token = $(`meta[name="csrf-token"]`).attr("content");        
-    
-    const peer = new Peer({ 
-        path: "/",
-        host: "127.0.0.1",
-        port: 9000
-     });
-    const socket = io.connect(`${window.location.protocol}//${window.location.hostname}:3000`);
+    const _token = $(`meta[name="csrf-token"]`).attr("content");
 
     navigator.mediaDevices.getUserMedia({ 
         video: true,
