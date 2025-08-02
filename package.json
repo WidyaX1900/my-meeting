@@ -4,7 +4,8 @@
     "scripts": {
         "dev": "vite",
         "build": "vite build",
-        "server": "nodemon server"
+        "server": "nodemon server",
+        "peerjs": "peerjs --port 9000"
     },
     "devDependencies": {
         "axios": "^1.6.4",
