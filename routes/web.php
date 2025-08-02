@@ -14,9 +14,9 @@ Route::middleware('guest')->group(function() {
 
 Route::middleware('auth')->group(function() {   
     Route::post('/logout', [AuthController::class, 'logout']);        
+    Route::get('/', [MeetingRoomController::class, 'index'])->middleware('ismeeting');
     
     // Meeting Route
-    Route::get('/', [MeetingRoomController::class, 'index']);
     Route::post('/meeting_room/store', [MeetingRoomController::class, 'store']);
     Route::get('/meeting', [MeetingController::class, 'index']);
     Route::get('/meeting/join/{token}', [MeetingController::class, 'join']);

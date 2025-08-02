@@ -11,15 +11,6 @@ class MeetingController extends Controller
 {
     public function index()
     {
-        $isMeeting = Meeting::where('user_id', Auth::id())
-            ->where('status', 'onmeet')
-            ->first();        
-        
-        if(!$isMeeting) {
-            session()->forget(['room_token', 'my_name']);
-            return redirect('/');
-        } 
-        
         $room_token = session('room_token');
         $my_name = session('my_name');
         $room_id = session('room_id');
