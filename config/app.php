@@ -53,7 +53,6 @@ return [
     */
 
     'url' => env('APP_URL', 'http://localhost'),
-    'asset_url' => env('ASSETS_URL', 'http://localhost/my-meeting/resources/'),
 
     /*
     |--------------------------------------------------------------------------
