@@ -9,7 +9,7 @@ export default defineConfig({
                 'resources/js/app.js', 
                 'resources/js/script.js', 
                 'resources/js/meeting.js', 
-                'resources/css/style.js',
+                'resources/css/style.css',
                 'resources/bootstrap/css/bootstrap.min.css'
             ],
             refresh: true,
