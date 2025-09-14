@@ -1,4 +1,6 @@
-$(function() {
+import { baseUrl } from "./helpers/base-url";
+
+$(function() {   
     $("#addMeetingRoomBtn").on("click", function () {
         $("#addMeetingRoomFormModal").modal("show");
         $("#alertInfo").html("");
@@ -62,12 +64,4 @@ $(function() {
             alert("url not copied");
         });
     });
-
-    function baseUrl(path = "") {
-        const protocol = window.location.protocol;
-        const hostname = window.location.hostname;
-        const port = window.location.port;
-
-        return `${protocol}//${hostname}:${port}/${path}`;
-    }
 });
