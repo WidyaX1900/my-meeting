@@ -6,15 +6,16 @@ let url = `${window.location.protocol}//${window.location.hostname}`;
 if (url === "https://meeting.widyaweb.com") {
     // socket dan peerjs production
     peer = new Peer({
-        path: "/",
+        path: "/meeting-peerserver",
         host: "peerjs.meeting.widyaweb.com",
-        port: 9000
+        port: 443,
+        secure: true
     });
 
     socket = io.connect("https://nodejsmeeting.widyaweb.com");
 } else {
     peer = new Peer({
-        path: "/",
+        path: "/meeting-peerserver",
         host: "127.0.0.1",
         port: 9000
     });    
