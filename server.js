@@ -4,16 +4,21 @@ import { Server } from "socket.io";
 
 const app = express();
 const server = createServer(app);
-const port = process.env.PORT || 3000;
+
+let localhost = true;
+// let localhost = false;
+
+const port = localhost ? 3000 : 4400;
+const origin = localhost ? "*" : "https://meeting.widyaweb.com/"
 const io = new Server(server, {
     cors: {
-        origin: "*",
+        origin: origin,
     }
 });
 let room_id;
 
 app.get("/", (req, res) => {
-    res.send(`<p>NodeJS running smoothly...</p>`);
+    res.send(`<p>NodeJS meeting running smoothly...</p>`);
 });
 
 io.on("connection", (socket) => {
