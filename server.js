@@ -9,7 +9,7 @@ let localhost = true;
 // let localhost = false;
 
 const port = localhost ? 3000 : 4400;
-const origin = localhost ? "*" : "https://meeting.widyaweb.com/"
+const origin = localhost ? "*" : "https://meeting.widyaweb.com"
 const io = new Server(server, {
     cors: {
         origin: origin,

@@ -7,7 +7,7 @@ if (url === "https://meeting.widyaweb.com") {
     // socket dan peerjs production
     peer = new Peer({
         path: "/meeting-peerserver",
-        host: "peerjs.meeting.widyaweb.com",
+        host: "peerjsmeeting.widyaweb.com",
         port: 443,
         secure: true
     });
