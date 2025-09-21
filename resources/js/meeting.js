@@ -78,7 +78,6 @@ if(document.getElementById("meetingRoom")) {
     }
 
     $("#leaveMeetingBtn").on("click", function() {
-        window.location.href = "/";
         socket.emit("user-leaved", { userId: localPeer });
         leaveMeeting();
     });
@@ -95,7 +94,10 @@ if(document.getElementById("meetingRoom")) {
             url: "/meeting/leave_meeting",
             type: "post",
             data: { _token, room_id },
-            dataType: "json"
+            dataType: "json",
+            success: function(response) {
+                window.location.href = "/";
+            }
         });
     }
 }

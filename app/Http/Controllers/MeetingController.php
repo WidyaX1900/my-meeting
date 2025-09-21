@@ -82,6 +82,9 @@ class MeetingController extends Controller
 
         if ($save) {
             session()->forget(['room_token', 'my_name', 'room_id']);
+            return response()->json([
+                'status' => 'success'
+            ]);
         }
     }
 }
