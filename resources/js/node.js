@@ -3,7 +3,7 @@ import { Peer } from "peerjs";
 let peer, socket;
 let url = `${window.location.protocol}//${window.location.hostname}`;
 
-if (url === "https://meeting.widyaweb.com/") {
+if (url === "https://meeting.widyaweb.com") {
     // socket dan peerjs production
     peer = new Peer({
         path: "/",
